@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <p>Molimo unesite svoje ime</p>
+            <input type="text" name="ime" id="ime" class="my-3 w-50">
+            <input type="button" id="btn1" value="Ok" class="btn-primary w-25">
+        </div>
+    </div>
+    <div class="container text-end mt-5">
+        <div id="resultDiv" class="px-3"></div>
+        <div id="txt" class="px-3"></div>
+    </div>
+    <div class="container text-center mb-5">
+        <input type="text" id="search" value="">
+        <button id="searchBtn">Search</button>
+        <button id="sortAsc">Sort Ascending</button>
+        <button id="sortDesc">Sort Descending</button>
+        <button id="avgAge">Average Age</button>
+        <button id="showLowSalaries">Show Low Salaries</button>
+        <button id="showHighSalaries">Show High Salaries</button>
+    </div>
+    <div class="container text-center mb-5">
+        <p id="showAvg"></p>
+    </div>
+    <div class="container d-flex justify-content-center">
+        <p id='showData2'></p>
+        <p id='showData'></p>
+    </div>
+</body>
+
+</html>
