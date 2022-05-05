@@ -1,4 +1,4 @@
-/* Fetchovanje podataka iz db.json */
+
 
 const promiseOfSomeData = fetch("data.json")
   .then((r) => r.json())
@@ -6,14 +6,13 @@ const promiseOfSomeData = fetch("data.json")
     return data;
   });
 
-/* Samopozivajuca asinhrona funkcija */
 
 (async () => {
   let users = [];
-  let someData = await promiseOfSomeData; // vraca se Promise od fetchovanja podataka
-  users = someData; // smestaju se podaci u promenljivu users
+  let someData = await promiseOfSomeData; 
+  users = someData; 
 
-  /* Kreira se dinamicka tabela na osnovu json fajla sa default vrednostima za niz i id elementa u koji se smesta */
+
   let createTable = (array = users, id = "showData") => {
     let col = [];
     for (let i = 0; i < array.length; i++) {
@@ -23,17 +22,17 @@ const promiseOfSomeData = fetch("data.json")
         }
       }
     }
-    const table = document.createElement("table"); // Kreira se table element
-    let tr = table.insertRow(-1); // Insertuje se row
+    const table = document.createElement("table"); 
+    let tr = table.insertRow(-1);
 
-    /* Dodaje se th element za svaki element u col nizu */
+    
     for (let i = 0; i < col.length; i++) {
       let th = document.createElement("th");
       th.innerHTML = col[i];
       tr.appendChild(th);
     }
 
-    /* Dodaje se celija za svaki element u col nizu */
+    
     for (let i = 0; i < array.length; i++) {
       tr = table.insertRow(-1);
       for (let j = 0; j < col.length; j++) {
@@ -42,16 +41,16 @@ const promiseOfSomeData = fetch("data.json")
       }
     }
 
-    /* Appenduje se tabela */
+ 
     let element = document.getElementById(id);
     element.innerHTML = "";
     element.appendChild(table);
   };
   createTable();
 
-  let searchBtn = document.getElementById("searchBtn"); // Kreiranje search buttona
+  let searchBtn = document.getElementById("searchBtn");
 
-  /* Kreiranje funckije viseg reda za konvertovanje velikih slova u mala */
+
   Array.prototype.malaSlova = function () {
     let i;
     for (i = 0; i < this.length; i++) {
@@ -59,7 +58,6 @@ const promiseOfSomeData = fetch("data.json")
     }
   };
 
-  /* Kreiranje listenera na click buttona sa search funkcionalnosti, filteruju se elementi iz promenljive users i vracaju se elementi koji odgovaraju, split() - podeli string u niz, includes() - proverava da li niz sadrzi tu vrednost  */
   searchBtn.addEventListener("click", () => {
     let search = document.getElementById("search");
     let filteredPeople = users.filter(function (currentElement) {
@@ -81,18 +79,18 @@ const promiseOfSomeData = fetch("data.json")
       );
     });
     createTable(filteredPeople, "showData2");
-    showData.style.display = "none"; // Sakrivanje prve tabele
+    showData.style.display = "none"; 
   });
 
   let sortAsc = document.getElementById("sortAsc");
   let sortDesc = document.getElementById("sortDesc");
 
-  /* Sortiranje po asc redu */
+  
   sortAsc.addEventListener("click", () => {
     users.sort((a, b) => parseFloat(a.id) - parseFloat(b.id));
     createTable();
   });
-  /* Sortiranje po desc redu */
+ 
   sortDesc.addEventListener("click", () => {
     users.sort((a, b) => parseFloat(b.id) - parseFloat(a.id));
     createTable();
@@ -101,7 +99,7 @@ const promiseOfSomeData = fetch("data.json")
   const avgAge = document.getElementById("avgAge");
   const showAvg = document.getElementById("showAvg");
 
-  /* Izracunavanje prosecnog broja godina */
+
   avgAge.addEventListener("click", () => {
     const startValue = 0;
     const sumAge = users.reduce(
@@ -114,7 +112,7 @@ const promiseOfSomeData = fetch("data.json")
   const showLowSalaries = document.getElementById("showLowSalaries");
   const showHighSalaries = document.getElementById("showHighSalaries");
 
-  /* Kreiranje nove tabele sa podacima usera cija je plata manja od 2500 sa forEach() */
+
   showLowSalaries.addEventListener("click", () => {
     let newUsers = [];
     users.forEach((el) => {
@@ -124,7 +122,7 @@ const promiseOfSomeData = fetch("data.json")
     });
     createTable(newUsers);
   });
-  /* Kreiranje nove tabele sa podacima usera cija je plata veca od 2500 sa map() */
+
   showHighSalaries.addEventListener("click", () => {
     let newUsers = [];
     users.map((el) => {
@@ -141,35 +139,32 @@ const ime = document.getElementById("ime");
 const btn1 = document.getElementById("btn1");
 const resultDiv = document.getElementById("resultDiv");
 
-/* Samopozivajuca funkcija za prikazivanje modala odmah po ucitavanju stranice */
+
 (function () {
   modal.style.display = "block";
 })();
 
-/* Funkcija koja se poziva na klik dugmeta (129. linija) */
-const modalFunc = () => {
-  modal.style.display = "none"; // uklanja modal
 
-  /* Proverava da li je input prazan, ako jeste ispisuje Welcome, guest, u suprotnom ispisuje Welcome, i uneseno ime */
+const modalFunc = () => {
+  modal.style.display = "none"; 
+
+  
 
   ime.value === ""
     ? (resultDiv.innerHTML = `Welcome, guest`)
     : (resultDiv.innerHTML = `Welcome, ${ime.value}`);
-  /* Countodwn */
 
-  /* Link originalnog koda */
-  /* https://stackoverflow.com/questions/37150291/recursive-countdown-timer */
 
-  let target = 1500000; // postavljeno na 25min
+  let target = 1500000; 
   let current = 0;
   function countdown() {
     current += 1000;
-    let diff = target - current; // izracunava 25min i prikazuje ih tako
-    let min = Math.floor(diff / 1000 / 60); // izracunava minute
-    let sec = (diff / 1000) % 60; // izracunava sekunde
+    let diff = target - current; 
+    let min = Math.floor(diff / 1000 / 60); 
+    let sec = (diff / 1000) % 60; 
 
-    document.getElementById("txt").innerHTML = min + ":" + sec; // ispisuje sve to u div sa klasom txt
-    if (diff > 0) setTimeout(countdown, 1000); // ako je ostalo minuta opet poziva countdown (rekurzija) posle jedne sekunde
+    document.getElementById("txt").innerHTML = min + ":" + sec; 
+    if (diff > 0) setTimeout(countdown, 1000); 
   }
 
   countdown();
@@ -177,19 +172,18 @@ const modalFunc = () => {
 
 btn1.addEventListener("click", modalFunc);
 
-/* Counter */
 const counters = document.querySelectorAll("#counter");
 
 counters.forEach((counter) => {
-  counter.innerText = "0"; // postavlja se pocetna vrednost na 0
+  counter.innerText = "0";
 
   const updateCounter = () => {
-    const target = +counter.getAttribute("data-target"); // uzima se data-target (maksimalna prikazana vrednost) i konvertuje se u int (zbog + ispred counter)
-    const c = +counter.innerText; // ista prica kao i gore
+    const target = +counter.getAttribute("data-target"); 
+    const c = +counter.innerText; 
 
-    const increment = target / 200; // odredjuje se vrednost za koliko ce se povecavati target, ako hoces da se sporije povecava povecaj 200
+    const increment = target / 200; 
 
-    /* Dok god je c manji od target, povecavaj c za vrednost increment (zaokruzi ako je neka decimalna vrednost) i ponovo pozovi updateCounter (rekurzija) nakon 0.001s u suprotnom postavi innerText na vrednost target*/
+    
     if (c < target) {
       counter.innerText = `${Math.ceil(c + increment)}`;
       setTimeout(updateCounter, 1);
